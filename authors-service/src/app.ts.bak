@@ -1,0 +1,85 @@
+import express, { Application, Request, Response, NextFunction } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+import * as dotenv from "dotenv";
+
+// Cargar variables de entorno
+dotenv.config();
+
+// Crear aplicación Express
+const app: Application = express();
+
+// ============================================
+// MIDDLEWARES
+// ============================================
+
+// Seguridad HTTP headers
+app.use(helmet());
+
+// CORS (permitir frontend)
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || "http://localhost:3001",
+    credentials: true,
+  })
+);
+
+// Parsear JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Logger de requests
+app.use(morgan("dev"));
+
+// ============================================
+// RUTAS
+// ============================================
+
+// Ruta de prueba (health check)
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    message: "Authors Service API",
+    version: "1.0.0",
+    status: "running",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// Ruta health check
+app.get("/health", (req: Request, res: Response) => {
+  res.status(200).json({
+    status: "OK",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// TODO: Agregar rutas de autores aquí
+// app.use('/authors', authorRoutes);
+
+// ============================================
+// MANEJO DE ERRORES
+// ============================================
+
+// Ruta no encontrada (404)
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    statusCode: 404,
+    message: "Route not found",
+    path: req.originalUrl,
+  });
+});
+
+// Manejador de errores global
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error("Error:", err);
+
+  res.status(500).json({
+    statusCode: 500,
+    message: "Internal server error",
+    error: process.env.NODE_ENV === "development" ? err.message : undefined,
+  });
+});
+
+export default app;

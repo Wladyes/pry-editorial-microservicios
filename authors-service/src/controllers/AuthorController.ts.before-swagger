@@ -1,0 +1,223 @@
+import { Router, Request, Response, NextFunction } from "express";
+import { AuthorService } from "../services/AuthorService";
+import { CreateAuthorDto } from "../dtos/create-author.dto";
+
+/**
+ * AuthorController
+ * 
+ * Controlador Express que expone endpoints REST para Authors.
+ * 
+ * RESPONSABILIDADES:
+ * - Definir rutas HTTP
+ * - Validar requests
+ * - Invocar AuthorService
+ * - Retornar respuestas con códigos HTTP apropiados
+ * - Delegar manejo de errores
+ * 
+ * PRINCIPIOS:
+ * - Thin Controller: lógica delegada a Service
+ * - Consistent API responses
+ * - Proper HTTP status codes
+ */
+export class AuthorController {
+  public router: Router;
+  private authorService: AuthorService;
+
+  constructor() {
+    this.router = Router();
+    this.authorService = new AuthorService();
+    this.initializeRoutes();
+  }
+
+  private initializeRoutes(): void {
+    // POST /authors - Crear autor
+    this.router.post("/", this.createAuthor.bind(this));
+
+    // GET /authors - Listar autores (con paginación)
+    this.router.get("/", this.getAllAuthors.bind(this));
+
+    // GET /authors/:id - Obtener autor por ID
+    this.router.get("/:id", this.getAuthorById.bind(this));
+
+    // PATCH /authors/:id - Actualizar autor
+    this.router.patch("/:id", this.updateAuthor.bind(this));
+
+    // DELETE /authors/:id - Eliminar autor
+    this.router.delete("/:id", this.deleteAuthor.bind(this));
+  }
+
+  /**
+   * POST /authors
+   * Crear un nuevo autor
+   */
+  private async createAuthor(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const createAuthorDto: CreateAuthorDto = req.body;
+
+      const author = await this.authorService.createAuthor(createAuthorDto);
+
+      res.status(201).json(author);
+    } catch (error: any) {
+      // Errores de validación o email duplicado
+      if (
+        error.message.includes("Validation failed") ||
+        error.message.includes("already exists")
+      ) {
+        res.status(400).json({
+          statusCode: 400,
+          message: error.message,
+          error: "Bad Request",
+        });
+      } else {
+        // Otros errores (500)
+        next(error);
+      }
+    }
+  }
+
+  /**
+   * GET /authors/:id
+   * Obtener autor por ID
+   */
+  private async getAuthorById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (isNaN(id)) {
+        res.status(400).json({
+          statusCode: 400,
+          message: "Invalid author ID",
+          error: "Bad Request",
+        });
+        return;
+      }
+
+      const author = await this.authorService.getAuthorById(id);
+
+      res.status(200).json(author);
+    } catch (error: any) {
+      // Error de no encontrado
+      if (error.message.includes("not found")) {
+        res.status(404).json({
+          statusCode: 404,
+          message: error.message,
+          error: "Not Found",
+        });
+      } else {
+        next(error);
+      }
+    }
+  }
+
+  /**
+   * GET /authors
+   * Listar autores con paginación
+   * Query params: ?page=1&limit=10
+   */
+  private async getAllAuthors(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+
+      const result = await this.authorService.getAllAuthors(page, limit);
+
+      res.status(200).json(result);
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  /**
+   * PATCH /authors/:id
+   * Actualizar un autor
+   */
+  private async updateAuthor(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (isNaN(id)) {
+        res.status(400).json({
+          statusCode: 400,
+          message: "Invalid author ID",
+          error: "Bad Request",
+        });
+        return;
+      }
+
+      const updateData = req.body;
+
+      const author = await this.authorService.updateAuthor(id, updateData);
+
+      res.status(200).json(author);
+    } catch (error: any) {
+      if (error.message.includes("not found")) {
+        res.status(404).json({
+          statusCode: 404,
+          message: error.message,
+          error: "Not Found",
+        });
+      } else if (error.message.includes("already exists")) {
+        res.status(400).json({
+          statusCode: 400,
+          message: error.message,
+          error: "Bad Request",
+        });
+      } else {
+        next(error);
+      }
+    }
+  }
+
+  /**
+   * DELETE /authors/:id
+   * Eliminar un autor
+   */
+  private async deleteAuthor(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (isNaN(id)) {
+        res.status(400).json({
+          statusCode: 400,
+          message: "Invalid author ID",
+          error: "Bad Request",
+        });
+        return;
+      }
+
+      await this.authorService.deleteAuthor(id);
+
+      res.status(204).send(); // No content
+    } catch (error: any) {
+      if (error.message.includes("not found")) {
+        res.status(404).json({
+          statusCode: 404,
+          message: error.message,
+          error: "Not Found",
+        });
+      } else {
+        next(error);
+      }
+    }
+  }
+}

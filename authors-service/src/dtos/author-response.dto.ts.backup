@@ -1,0 +1,50 @@
+import { Author } from "../entities/Author.entity";
+
+/**
+ * AuthorResponseDto
+ * 
+ * Data Transfer Object para respuestas de autor.
+ * Transforma la entidad Author en un formato limpio para el cliente.
+ * 
+ * BUENA PRÁCTICA: No exponer entidades TypeORM directamente
+ * PATRÓN: DTO Pattern
+ */
+export class AuthorResponseDto {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  biography?: string;
+  nationality?: string;
+  birthDate?: string;
+  createdAt: string;
+  updatedAt: string;
+
+  constructor(author: Author) {
+    this.id = author.id;
+    this.firstName = author.firstName;
+    this.lastName = author.lastName;
+    this.email = author.email;
+    this.biography = author.biography;
+    this.nationality = author.nationality;
+    this.birthDate = author.birthDate ? author.birthDate.toISOString().split("T")[0] : undefined;
+    this.createdAt = author.createdAt.toISOString();
+    this.updatedAt = author.updatedAt.toISOString();
+  }
+
+  /**
+   * Método estático para convertir múltiples autores
+   * @param authors - Array de entidades Author
+   * @returns Array de DTOs
+   */
+  static fromArray(authors: Author[]): AuthorResponseDto[] {
+    return authors.map((author) => new AuthorResponseDto(author));
+  }
+
+  /**
+   * Obtener nombre completo (usando método de la entidad)
+   */
+  getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
