@@ -7,48 +7,37 @@ import swaggerUi from "swagger-ui-express";
 import { AuthorController } from "./controllers/AuthorController";
 import { swaggerSpec } from "./config/swagger.config";
 
-// Cargar variables de entorno
 dotenv.config();
 
-// Crear aplicación Express
 const app: Application = express();
 
 // ============================================
 // MIDDLEWARES
 // ============================================
 
-// Seguridad HTTP headers
 app.use(helmet());
 
-// CORS (permitir frontend)
+// ✅ CORS actualizado para frontend
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3001",
+    origin: [
+      "http://localhost:3001",
+      "http://192.168.56.1:3001",
+      "http://localhost:3000", // temporal
+      "http://192.168.56.1:3000" // temporal
+    ],
     credentials: true,
   })
 );
 
-// Parsear JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Logger de requests
 app.use(morgan("dev"));
 
 // ============================================
 // SWAGGER DOCUMENTATION
 // ============================================
 
-/**
- * @swagger
- * /:
- *   get:
- *     summary: Información de la API
- *     tags: [Health]
- *     responses:
- *       200:
- *         description: Información del servicio
- */
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customCss: ".swagger-ui .topbar { display: none }",
   customSiteTitle: "Authors Service API - Swagger",
@@ -58,7 +47,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
 // RUTAS
 // ============================================
 
-// Ruta de prueba (health check)
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
     message: "Authors Service API",
@@ -78,33 +66,6 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-/**
- * @swagger
- * /health:
- *   get:
- *     summary: Health check del servicio
- *     tags: [Health]
- *     responses:
- *       200:
- *         description: Servicio funcionando correctamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: OK
- *                 uptime:
- *                   type: number
- *                   example: 125.456
- *                 timestamp:
- *                   type: string
- *                   format: date-time
- *                 database:
- *                   type: string
- *                   example: connected
- */
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({
     status: "OK",
@@ -114,7 +75,6 @@ app.get("/health", (req: Request, res: Response) => {
   });
 });
 
-// Registrar rutas de Authors
 const authorController = new AuthorController();
 app.use("/authors", authorController.router);
 
@@ -122,7 +82,6 @@ app.use("/authors", authorController.router);
 // MANEJO DE ERRORES
 // ============================================
 
-// Ruta no encontrada (404)
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     statusCode: 404,
@@ -132,7 +91,6 @@ app.use((req: Request, res: Response) => {
   });
 });
 
-// Manejador de errores global
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error("❌ Error:", err);
 

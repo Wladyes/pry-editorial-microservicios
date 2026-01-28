@@ -7,6 +7,22 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configurar CORS (ANTES de otros servicios)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:3001",
+            "http://192.168.56.1:3001",
+            "http://localhost:3000"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -34,6 +50,9 @@ builder.Services.AddScoped<IPublicationService, PublicationService>();
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+// Usar CORS (ANTES de MapControllers)
+app.UseCors("AllowFrontend");
 
 app.UseSwagger();
 app.UseSwaggerUI();

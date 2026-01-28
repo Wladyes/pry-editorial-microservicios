@@ -1,2 +1,34 @@
+# Node.js
 node_modules/
+npm-debug.log*
+.next/
+.turbo/
+package-lock.json
+
+# .NET archivos compilados
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.user
+*.suo
+
+# Variables de entorno
 .env
+.env.local
+.env.production.local
+appsettings.Development.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
