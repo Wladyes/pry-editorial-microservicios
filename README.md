@@ -54,6 +54,3 @@ Este proyecto es software de código abierto bajo la
 [Licencia MIT](https://opensource.org/license/MIT).
 
 Copyright (c) 2026
-
-* adaptarlo a **rubrica universitaria ESPE**
-* o validar que cumpla **estándares GitHub** ✔️
