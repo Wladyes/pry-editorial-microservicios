@@ -37,9 +37,9 @@ Archivos disponibles en `/bpmn`.
 
 ## Equipo
 
-* Wladymir Escobar
-* Sandy Mariño
-* Margarita Fajardo
+* Wladymir Escobar - @Wladyes
+* Sandy Mariño - @Jessy-sylve
+* Margarita Fajardo - @MFajardo2812
 
 ## Licencia
 
