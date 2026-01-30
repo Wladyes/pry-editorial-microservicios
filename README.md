@@ -26,9 +26,9 @@ cd pry-editorial-microservicios
 docker compose up --build
 ```
 
-Frontend: [http://localhost:3001](http://localhost:3001)
-Authors API: [http://localhost:3000](http://localhost:3000)
-Publications API: [http://localhost:8080](http://localhost:8080)
+* Frontend: [http://localhost:3001](http://localhost:3001)
+* Authors API: [http://localhost:3000](http://localhost:3000)
+* Publications API: [http://localhost:8080](http://localhost:8080)
 
 ## BPMN
 
