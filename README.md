@@ -16,7 +16,14 @@ Sistema de gestión editorial basado en microservicios para administrar **autore
 
 ## Tecnologías
 
-Node.js · .NET 8 · PostgreSQL · MySQL · Next.js · TypeScript · Docker · Docker Compose
+* Node.js
+* .NET 8
+* PostgreSQL
+* MySQL
+* Next.js
+* TypeScript
+* Docker
+* Docker Compose
 
 ## Ejecución
 
