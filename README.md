@@ -1,7 +1,3 @@
-Perfecto 👍
-Aquí tienes un **README.md extremadamente conciso, sintetizado, sin exceso de orden ni documentación**, con **Licencia MIT simplificada** al final, listo para copiar y pegar.
-
----
 
 # Sistema Editorial – Microservicios
 
@@ -51,12 +47,6 @@ Este proyecto es software de código abierto bajo la
 [Licencia MIT](https://opensource.org/license/MIT).
 
 Copyright (c) 2026
-Wladymir Escobar, Sandy Mariño, Margarita Fajardo
 
----
-
-Si quieres, en el siguiente paso puedo:
-
-* dejar el README **aún más corto (modo académico extremo)**
 * adaptarlo a **rubrica universitaria ESPE**
 * o validar que cumpla **estándares GitHub** ✔️
