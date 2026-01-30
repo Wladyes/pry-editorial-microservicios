@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   # Base de datos para Authors Service (PostgreSQL)
   db-authors:
     image: postgres:15-alpine
+    platform: linux/amd64
     container_name: db-authors
     environment:
       POSTGRES_DB: authors_db
@@ -26,6 +25,7 @@ services:
     build:
       context: ./authors-service
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: authors-service
     environment:
       DATABASE_URL: postgresql://admin:admin123@db-authors:5432/authors_db
@@ -47,6 +47,7 @@ services:
   # Base de datos para Publications Service (MySQL)
   db-publications:
     image: mysql:8.0
+    platform: linux/amd64
     container_name: db-publications
     environment:
       MYSQL_DATABASE: publications_db
@@ -70,6 +71,7 @@ services:
     build:
       context: ./PublicationsService
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: publications-service
     environment:
       ConnectionStrings__DefaultConnection: "Server=db-publications;Database=publications_db;User=pubuser;Password=pubpass123;"
@@ -96,6 +98,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: frontend
     environment:
       NEXT_PUBLIC_AUTHORS_API: "http://localhost:3000"
