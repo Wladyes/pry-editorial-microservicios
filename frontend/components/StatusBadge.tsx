@@ -2,6 +2,7 @@ interface StatusBadgeProps {
   status: 'DRAFT' | 'INREVIEW' | 'APPROVED' | 'PUBLISHED' | 'REJECTED';
 }
 
+// Componente funcional StatusBadge
 export default function StatusBadge({ status }: StatusBadgeProps) {
   const getStatusStyle = () => {
     switch (status) {

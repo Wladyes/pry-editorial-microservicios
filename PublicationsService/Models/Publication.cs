@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PublicationsService.Enums;
-
+//Modelo para representar una publicacion eredando de Document
 namespace PublicationsService.Models
 {
     [Table("publications")]

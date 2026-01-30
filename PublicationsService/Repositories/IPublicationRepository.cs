@@ -1,6 +1,6 @@
 using PublicationsService.Models;
 using PublicationsService.Enums;
-
+//Repositorio para manejar las operaciones CRUD y consultas relacionadas con las publicaciones
 namespace PublicationsService.Repositories
 {
     public interface IPublicationRepository

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+// Configurar la URL base de la API de autores
 const API_URL = process.env.NEXT_PUBLIC_AUTHORS_API || 'http://localhost:3000';
 
+// Definición de la interfaz Author y DTOs
 export interface Author {
   id: number;
   firstName: string;
@@ -14,6 +16,7 @@ export interface Author {
   updatedAt?: string;
 }
 
+// DTO para crear un nuevo autor
 export interface CreateAuthorDto {
   firstName: string;
   lastName: string;
@@ -22,6 +25,7 @@ export interface CreateAuthorDto {
   nationality?: string;
 }
 
+// DTO para actualizar un autor existente
 export interface UpdateAuthorDto {
   firstName?: string;
   lastName?: string;
@@ -30,6 +34,7 @@ export interface UpdateAuthorDto {
   nationality?: string;
 }
 
+// API de autores con métodos para interactuar con el backend
 export const authorsApi = {
   getAll: async (): Promise<Author[]> => {
     const response = await axios.get(`${API_URL}/authors`);
@@ -47,16 +52,18 @@ export const authorsApi = {
     
     return [];
   },
-
+  // Obtener un autor por ID
   getById: async (id: number): Promise<Author> => {
     const { data } = await axios.get(`${API_URL}/authors/${id}`);
     return data;
   },
 
+  // Crear un nuevo autor (POST)
   create: async (dto: CreateAuthorDto): Promise<Author> => {
     const { data } = await axios.post(`${API_URL}/authors`, dto);
     return data;
   },
+  
   //Actualizar autor (PATCH)
   update: async (id: number, dto: UpdateAuthorDto): Promise<Author> => {
     const { data } = await axios.patch(`${API_URL}/authors/${id}`, dto);

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+ //Modelo base abstracto para documentos
 namespace PublicationsService.Models
 {
     public abstract class Document

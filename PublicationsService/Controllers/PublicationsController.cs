@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using PublicationsService.DTOs;
 using PublicationsService.Services;
-using PublicationsService.Enums;
+using PublicationsService.Enums;  
 
+// Controllers/PublicationsController.cs
 namespace PublicationsService.Controllers
 {
     [ApiController]
@@ -17,7 +18,7 @@ namespace PublicationsService.Controllers
             _service = service;
             _logger = logger;
         }
-
+        // POST: api/Publications
         [HttpPost]
         [ProducesResponseType(typeof(PublicationResponseDto), 201)]
         [ProducesResponseType(400)]
@@ -35,7 +36,7 @@ namespace PublicationsService.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
+        // GET: api/Publications/{id}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(PublicationResponseDto), 200)]
         [ProducesResponseType(404)]
@@ -49,7 +50,7 @@ namespace PublicationsService.Controllers
 
             return Ok(PublicationResponseDto.FromEntity(publication));
         }
-
+        // GET: api/Publications
         [HttpGet]
         [ProducesResponseType(typeof(List<PublicationResponseDto>), 200)]
         public async Task<IActionResult> GetPublications([FromQuery] int page = 1, [FromQuery] int limit = 10)
@@ -58,7 +59,7 @@ namespace PublicationsService.Controllers
             var response = publications.Select(PublicationResponseDto.FromEntity).ToList();
             return Ok(response);
         }
-
+        // PATCH: api/Publications/{id}/status
         [HttpPatch("{id}/status")]
         [ProducesResponseType(typeof(PublicationResponseDto), 200)]
         [ProducesResponseType(404)]

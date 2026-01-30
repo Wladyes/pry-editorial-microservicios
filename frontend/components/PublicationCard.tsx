@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import StatusBadge from './StatusBadge';
 
+// Tarjeta para mostrar información de una publicación
 interface PublicationCardProps {
   publication: {
     id: number;
@@ -12,7 +13,7 @@ interface PublicationCardProps {
     updatedAt: string;
   };
 }
-
+// Componente funcional PublicationCard
 export default function PublicationCard({ publication }: PublicationCardProps) {
   return (
     <Link href={`/publications/${publication.id}`}>

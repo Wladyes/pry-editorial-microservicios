@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { publicationsApi } from '@/lib/api/publications';
 import PublicationCard from '@/components/PublicationCard';
 
+//paguina de lista de publicaciones
 export default function PublicationsPage() {
   const [publications, setPublications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);

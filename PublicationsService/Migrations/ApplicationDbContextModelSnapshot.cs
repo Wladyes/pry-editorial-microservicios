@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PublicationsService.Data;
 
 #nullable disable
-
+// auto generado
 namespace PublicationsService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]

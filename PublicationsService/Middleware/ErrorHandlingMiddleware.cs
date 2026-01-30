@@ -2,6 +2,8 @@ using System.Net;
 using System.Text.Json;
 using PublicationsService.DTOs;
 
+
+//Middleware para manejar errores globalmente
 namespace PublicationsService.Middleware
 {
     public class ErrorHandlingMiddleware

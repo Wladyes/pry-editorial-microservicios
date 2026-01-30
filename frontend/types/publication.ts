@@ -1,10 +1,11 @@
+// Definición de los tipos y DTOs relacionados con publicaciones
 export type EditorialStatus = 
   | 'DRAFT' 
   | 'INREVIEW' 
   | 'APPROVED' 
   | 'PUBLISHED' 
   | 'REJECTED';
-
+// Interfaz Publication
 export interface Publication {
   id: number;
   title: string;

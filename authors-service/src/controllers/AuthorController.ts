@@ -19,16 +19,17 @@ import { CreateAuthorDto } from "../dtos/create-author.dto";
  * 
  * Controlador Express que expone endpoints REST para Authors.
  */
+
 export class AuthorController {
   public router: Router;
   private authorService: AuthorService;
-
+  // Inicializar rutas y servicios
   constructor() {
     this.router = Router();
     this.authorService = new AuthorService();
     this.initializeRoutes();
   }
-
+   //
   private initializeRoutes(): void {
     this.router.post("/", this.createAuthor.bind(this));
     this.router.get("/", this.getAllAuthors.bind(this));
@@ -65,6 +66,7 @@ export class AuthorController {
    *       500:
    *         description: Error interno del servidor
    */
+  // Crear un nuevo autor
   private async createAuthor(
     req: Request,
     res: Response,
@@ -119,6 +121,7 @@ export class AuthorController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
+  // Obtener autor por ID
   private async getAuthorById(
     req: Request,
     res: Response,
@@ -178,6 +181,7 @@ export class AuthorController {
    *             schema:
    *               $ref: '#/components/schemas/PaginatedAuthors'
    */
+  // Listar autores con paginación
   private async getAllAuthors(
     req: Request,
     res: Response,
@@ -233,6 +237,7 @@ export class AuthorController {
    *       404:
    *         description: Autor no encontrado
    */
+  // Actualizar un autor
   private async updateAuthor(
     req: Request,
     res: Response,
@@ -291,6 +296,7 @@ export class AuthorController {
    *       404:
    *         description: Autor no encontrado
    */
+  // Eliminar un autor
   private async deleteAuthor(
     req: Request,
     res: Response,

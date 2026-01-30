@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+// Componente de navegación con enlaces a las secciones principales
 export default function Navigation() {
   return (
     <nav className="bg-blue-600 text-white p-4">

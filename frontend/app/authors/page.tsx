@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { authorsApi, Author } from '@/lib/api/authors';
 import AuthorCard from '@/components/AuthorCard';
 
+//paguina de lista de autores
 export default function AuthorsPage() {
   const [authors, setAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState(true);

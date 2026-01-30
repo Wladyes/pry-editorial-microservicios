@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { publicationsApi } from '@/lib/api/publications';
 import StatusBadge from '@/components/StatusBadge';
 
+//paguina de detalle de la publicación
 const EDITORIAL_STATES = ['DRAFT', 'INREVIEW', 'APPROVED', 'PUBLISHED', 'REJECTED'] as const;
 
 export default function PublicationDetailPage() {

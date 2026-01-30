@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { authorsApi } from './authors';
 
+// Configurar la URL base de la API de publicaciones
 const API_URL = process.env.NEXT_PUBLIC_PUBLICATIONS_API || 'http://localhost:8080';
 
+// Definición de los tipos y DTOs
 export type EditorialStatus = 
   | 'DRAFT' 
   | 'INREVIEW' 
@@ -10,6 +12,7 @@ export type EditorialStatus =
   | 'PUBLISHED' 
   | 'REJECTED';
 
+// Interfaz de Publicación
 export interface Publication {
   id: number;
   title: string;
@@ -20,6 +23,7 @@ export interface Publication {
   updatedAt: string;
 }
 
+// Publicación con datos del autor (requisito documento)
 export interface PublicationWithAuthor extends Publication {
   author?: {
     id: number;
@@ -29,16 +33,19 @@ export interface PublicationWithAuthor extends Publication {
   };
 }
 
+// DTO para crear una nueva publicación
 export interface CreatePublicationDto {
   title: string;
   authorId: number;
   content?: string;
 }
 
+// DTO para cambiar el estado editorial
 export interface ChangeStatusDto {
   status: EditorialStatus;
 }
 
+// API de publicaciones con métodos para interactuar con el backend
 export const publicationsApi = {
   // Listar todas las publicaciones
   getAll: async (): Promise<Publication[]> => {

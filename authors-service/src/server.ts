@@ -14,37 +14,37 @@ const PORT = process.env.PORT || 3000;
 
 async function startServer() {
   try {
-    console.log("í´„ Connecting to database...");
+    console.log("Connecting to database...");
 
     // Inicializar conexiÃ³n TypeORM
     await AppDataSource.initialize();
 
-    console.log("âœ… Database connected successfully!");
-    console.log(`í³Š Database: ${process.env.DB_NAME}`);
-    console.log(`í´Œ Host: ${process.env.DB_HOST}:${process.env.DB_PORT}`);
+    console.log("Database connected successfully!");
+    console.log(`Database: ${process.env.DB_NAME}`);
+    console.log(`Host: ${process.env.DB_HOST}:${process.env.DB_PORT}`);
 
     // Iniciar servidor Express
     app.listen(PORT, () => {
-      console.log("\níº€ Server is running!");
-      console.log(`í³¡ Port: ${PORT}`);
-      console.log(`í¼ URL: http://localhost:${PORT}`);
-      console.log(`í¿¥ Health: http://localhost:${PORT}/health`);
-      console.log(`\nâ° Started at: ${new Date().toLocaleString()}`);
+      console.log("\nServer is running!");
+      console.log(`Port: ${PORT}`);
+      console.log(`URL: http://localhost:${PORT}`);
+      console.log(`Health: http://localhost:${PORT}/health`);
+      console.log(`\nStarted at: ${new Date().toLocaleString()}`);
       console.log("======================================\n");
     });
   } catch (error) {
-    console.error("âŒ Error starting server:", error);
+    console.error("Error starting server:", error);
     process.exit(1);
   }
 }
 
 // Manejo de cierre graceful
 process.on("SIGINT", async () => {
-  console.log("\ní»‘ Shutting down gracefully...");
+  console.log("\nShutting down gracefully...");
 
   if (AppDataSource.isInitialized) {
     await AppDataSource.destroy();
-    console.log("âœ… Database connection closed");
+    console.log("Database connection closed");
   }
 
   process.exit(0);

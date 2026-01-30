@@ -5,15 +5,15 @@ namespace PublicationsService.DTOs
 {
     public class PublicationResponseDto
     {
-        public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public int AuthorId { get; set; }
-        public string? Content { get; set; }
-        public string Status { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public int Id { get; set; } //identificador de la publicacion
+        public string Title { get; set; } = string.Empty; //titulo de la publicacion
+         public int AuthorId { get; set; } //identificador del autor
+        public string? Content { get; set; } // contenido de la publicacion
+        public string Status { get; set; } = string.Empty; // estado editorial de la publicacion
+        public DateTime CreatedAt { get; set; } //fecha de creacion de la publicacion
+         public DateTime UpdatedAt { get; set; } //fecha de ultima actualizacion de la publicacion
 
-        public static PublicationResponseDto FromEntity(Publication publication)
+        public static PublicationResponseDto FromEntity(Publication publication) //mapeo de la entidad Publication al DTO PublicationResponseDto
         {
             return new PublicationResponseDto
             {

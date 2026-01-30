@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { authorsApi, Author, UpdateAuthorDto } from '@/lib/api/authors';
 
+// pagina para editar un autor existente
 export default function EditAuthorPage() {
   const params = useParams();
   const router = useRouter();

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { publicationsApi } from '@/lib/api/publications';
 import { authorsApi } from '@/lib/api/authors';
 
+// pagina para crear una nueva publicación
 export default function NewPublicationPage() {
   const router = useRouter();
   const [authors, setAuthors] = useState<any[]>([]);

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { authorsApi, Author } from '@/lib/api/authors';
 
+//paguina de detalle del autor
 export default function AuthorDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function AuthorDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [deleting, setDeleting] = useState(false);
-
+   
   useEffect(() => {
     const fetchAuthor = async () => {
       try {

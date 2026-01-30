@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using PublicationsService.Models;
 
+
+//Contexto de la base de datos para la aplicacion
 namespace PublicationsService.Data
 {
     public class ApplicationDbContext : DbContext

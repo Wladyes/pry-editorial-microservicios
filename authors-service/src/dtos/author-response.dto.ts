@@ -9,6 +9,7 @@ import { Author } from "../entities/Author.entity";
  * BUENA PRÁCTICA: No exponer entidades TypeORM directamente
  * PATRÓN: DTO Pattern
  */
+
 export class AuthorResponseDto {
   id: number;
   firstName: string;

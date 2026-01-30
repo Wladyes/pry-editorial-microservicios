@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+// Tarjeta para mostrar información de un autor
 interface AuthorCardProps {
   author: {
     id: number;
@@ -10,7 +10,7 @@ interface AuthorCardProps {
     nationality?: string;
   };
 }
-
+// Componente funcional AuthorCard
 export default function AuthorCard({ author }: AuthorCardProps) {
   return (
     <Link href={`/authors/${author.id}`}>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+//pagina principal del sistema editorial
 export default function HomePage() {
   return (
     <div className="container mx-auto p-8">
