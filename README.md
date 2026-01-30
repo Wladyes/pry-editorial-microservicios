@@ -57,11 +57,6 @@ El sistema implementa una arquitectura de microservicios con las siguientes cara
 - Redes bridge para comunicación entre servicios
 - Volúmenes persistentes para bases de datos
 
-## Estructura del Proyecto
-
-pry-editorial-microservicios/ ├── docker-compose.yml ├── README.md ├── bpmn/ │ ├── proceso-editorial.bpmn │ └── capturas/ ├── authors-service/ │ ├── Dockerfile │ ├── README.md │ └── src/ ├── PublicationsService/ │ ├── Dockerfile │ ├── README.md │ └── Controllers/ └── frontend/ ├── Dockerfile ├── README.md └── app
-
-
 ## Ejecución
 
 ### Prerequisitos
